@@ -7,6 +7,7 @@ $ yc iam key create --service-account-name neto-robot --output key.json
 
 Создайте ключ доступа для сервисного аккаунта:
 
+```
 iva@c9:~/Documents/YC $ yc iam access-key create --service-account-name neto-robot
 access_key:
   id: ajee50ng7jcav6p2c6oq
@@ -14,31 +15,36 @@ access_key:
   created_at: "2022-03-25T23:39:13.295548648Z"
   key_id: YCAJEou5UEaZBnd8uIJte-gcn
 secret: YCOX5m-V59haXjhUWAKTWxFDNjwn1nSdZmFAnh0B
-
+```
 
 
 Узнайте идентификатор сервисного аккаунта по его имени:
 
+```
 iva@c9:~/Documents/YC $ yc iam service-account get neto-robot
 id: ajegb4hm7vmc8mtflcdq
 folder_id: b1gm6im3mcuc36r6kn8s
 created_at: "2022-03-25T22:28:10Z"
 name: neto-robot
 description: Service account for Netology
-
+```
 или
+
+```
 iva@c9:~/Documents/YC $ yc iam service-account list
 +----------------------+------------+
 |          ID          |    NAME    |
 +----------------------+------------+
 | ajegb4hm7vmc8mtflcdq | neto-robot |
 +----------------------+------------+
-
+```
 Назначьте роль сервисному аккаунту neto-robot, используя его идентификатор:
 
+```
 yc resource-manager folder add-access-binding netology \
     --role editor \
     --subject serviceAccount:ajegb4hm7vmc8mtflcdq
+```
 
 Параметры командной строки
 --access-key STR: Идентификатор ключа доступа
