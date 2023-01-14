@@ -1,0 +1,6 @@
+yc_cloud_id              = "b1gos10ashr7cgusvgg9"
+yc_folder_id             = "b1gm6im3mcuc36r6kn8s"
+yc_zone                  = "ru-central1-a"
+service_account_key_file = "../YC/tf_sa_key.json"
+sa_name			 = "neto-fdevops-13"
+bucket_tf		 = "neto-bucket-fdevops-13"

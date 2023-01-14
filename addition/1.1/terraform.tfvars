@@ -1,0 +1,7 @@
+yc_cloud_id              = "b1gos10ashr7cgusvgg9"
+yc_folder_id             = "b1gm6im3mcuc36r6kn8s"
+yc_zone                  = "ru-central1-a"
+public_key_path          = "~/.ssh/id_rsa.pub"
+private_key_path         = "~/.ssh/id_rsa"
+service_account_key_file = "../YC/sa_json_key_terraform.json"
+sa_id = "neto-fdevops-13"
