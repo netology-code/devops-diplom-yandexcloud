@@ -107,6 +107,36 @@ iva@c9v:~/Documents/devops-diplom-yandexcloud/addition/1.1  (1.2 *)$ tree
 2. В файле `~/.kube/config` находятся данные для доступа к кластеру.
 3. Команда `kubectl get pods --all-namespaces` отрабатывает без ошибок.
 
+*[Порядок развёртывания](addition/2.0/ReadMe_kube.md)
+
+```
+iva@c9v:~/Documents/devops-diplom-yandexcloud  (2.0 *)$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE
+kube-system   calico-kube-controllers-75748cc9fd-gfgkb   1/1     Running   0          77m
+kube-system   calico-node-bnxb2                          1/1     Running   0          78m
+kube-system   calico-node-cw7fp                          1/1     Running   1          78m
+kube-system   calico-node-nsgcj                          1/1     Running   0          78m
+kube-system   calico-node-qzdf8                          1/1     Running   0          78m
+kube-system   coredns-588bb58b94-c4qmw                   1/1     Running   0          77m
+kube-system   coredns-588bb58b94-kxzpt                   1/1     Running   0          77m
+kube-system   dns-autoscaler-5b9959d7fc-94ljn            1/1     Running   0          77m
+kube-system   kube-apiserver-cp1                         1/1     Running   1          79m
+kube-system   kube-controller-manager-cp1                1/1     Running   1          79m
+kube-system   kube-proxy-2ht95                           1/1     Running   0          78m
+kube-system   kube-proxy-j2hq2                           1/1     Running   0          78m
+kube-system   kube-proxy-pn7fh                           1/1     Running   0          78m
+kube-system   kube-proxy-vm2d6                           1/1     Running   0          78m
+kube-system   kube-scheduler-cp1                         1/1     Running   1          79m
+kube-system   nginx-proxy-node1                          1/1     Running   0          77m
+kube-system   nginx-proxy-node2                          1/1     Running   0          77m
+kube-system   nginx-proxy-node3                          1/1     Running   0          77m
+kube-system   nodelocaldns-7c4ns                         1/1     Running   0          77m
+kube-system   nodelocaldns-7ln6t                         1/1     Running   0          77m
+kube-system   nodelocaldns-8n7k6                         1/1     Running   0          77m
+kube-system   nodelocaldns-bnhmf                         1/1     Running   0          77m
+
+```
+
 ---
 ### Создание тестового приложения
 
@@ -114,10 +144,10 @@ iva@c9v:~/Documents/devops-diplom-yandexcloud/addition/1.1  (1.2 *)$ tree
 
 Способ подготовки:
 
-1. Рекомендуемый вариант:  
-   а. Создайте отдельный git репозиторий с простым nginx конфигом, который будет отдавать статические данные.  
-   б. Подготовьте Dockerfile для создания образа приложения.  
-2. Альтернативный вариант:  
+1. Рекомендуемый вариант:
+   а. Создайте отдельный git репозиторий с простым nginx конфигом, который будет отдавать статические данные.
+   б. Подготовьте Dockerfile для создания образа приложения.
+2. Альтернативный вариант:
    а. Используйте любой другой код, главное, чтобы был самостоятельно создан Dockerfile.
 
 Ожидаемый результат:
