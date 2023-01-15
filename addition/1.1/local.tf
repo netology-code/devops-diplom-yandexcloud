@@ -35,7 +35,7 @@ locals {
     platform_id = "standard-v3"
     stage = {
       controls = {
-        count         = 1
+        count         = 2
         cpu           = 2
         memory        = 4
         core_fraction = 20
