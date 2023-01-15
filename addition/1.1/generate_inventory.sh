@@ -41,7 +41,7 @@ printf "\n\n"
 printf "[bastion]"
 printf "ansible_user=ansible\n"
 printf "bastion ansible_host='"
-terraform output -json k8s_deployer_IP | jq -cj '.'
+terraform output -json k8s_deployer_nat_IP | jq -cj '.'
 printf "'\n\n"
 
 cat << EOF

@@ -48,6 +48,7 @@
 
 *[Порядок создания сервисного аккаунта, файла с данными 'Service Account key file'](./addition/1.0/ReadMe_01.md)
 
+
 3. Настройте [workspaces](https://www.terraform.io/docs/language/state/workspaces.html)  
    а. Рекомендуемый вариант: создайте два workspace: *stage* и *prod*. В случае выбора этого варианта все последующие шаги должны учитывать факт существования нескольких workspace.  
    б. Альтернативный вариант: используйте один workspace, назвав его *stage*. Пожалуйста, не используйте workspace, создаваемый Terraform-ом по-умолчанию (*default*).
@@ -63,6 +64,27 @@
 Достигнут ожидаемый результат, Terraform сконфигурирован для работы с S3 bucket в ЯО, используется workspace "stage", состояние terraform хранится в /neto-bucket-fdevops-13/env:/stage/terraform.tfstate.
 
 [Полученная конфигурация инфраструктуры](./addition/1.1/) является предварительной и будет изменена в дальнейшем.
+
+
+```
+iva@c9v:~/Documents/devops-diplom-yandexcloud/addition/1.1  (1.2 *)$ tree 
+.
+├── generate_inventory.sh - генерация inventory для последующего использования в kubespray
+├── k8s_deployer.tf	- инстанс для настройки kubernetes
+├── k8s_instance.tf	- инстансы kubernetes
+├── local.tf		- описание инстансов kubernetes через локальные переменные
+├── main.tf		- основной модуль
+├── network.tf		- описание создаваемых сетей через локальные переменнные
+├── outputs.tf		- вывод результата создания инфраструктуры 
+├── ReadMe_01.1.md
+├── ReadMe_01.2.md
+├── terraform.tfvars	- переменные terraform
+├── variables.tf	- описание переменных terraform со значениями по умолчанию
+└── versions.tf		- описание провайдера ЯО для terraform и хранения состояния в S3 bucket
+
+0 directories, 12 files
+
+```
 
 ---
 ### Создание Kubernetes кластера

@@ -37,7 +37,7 @@ resource "yandex_compute_instance" "k8s_deployer" {
 
 }
 
-output "k8s_deployer_NAT_IP" {
+output "k8s_deployer_nat_IP" {
   value = yandex_compute_instance.k8s_deployer.*.network_interface.0.nat_ip_address
 }
 
