@@ -29,13 +29,13 @@ locals {
 locals {
   # Определяем параметры будущих кластеров k8s в зависимости от текущего workspace
   k8s = {
-    image_id    = "fd8takuai2fl6ohntoqj" #ubuntu-2004-lts
+    image_id    = var.yc_image_id
     preemptible = false
     disk_type   = "network-hdd"
     platform_id = "standard-v3"
     stage = {
       controls = {
-        count         = 2
+        count         = 1
         cpu           = 2
         memory        = 4
         core_fraction = 20

@@ -11,12 +11,14 @@ variable "yc_zone" {
 }
 
 variable "yc_image_family" {
-  default = "centos-8"
+  default = "ubuntu-2004-lts" # "fd8takuai2fl6ohntoqj"
 }
 
-variable "vm_prefix" {
-  default = "centos"
+variable "yc_image_id" {
+  default = "fd8takuai2fl6ohntoqj"
 }
+
+
 
 variable "public_key_path" {
   # Описание переменной
