@@ -12,6 +12,8 @@ terraform {
     key                         = "terraform.tfstate"
     skip_region_validation      = true
     skip_credentials_validation = true
+    access_key = ""
+    secret_key = ""
   }
 
   required_version = ">= 1.1"
