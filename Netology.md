@@ -152,8 +152,11 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 
 Ожидаемый результат:
 
-1. Git репозиторий с тестовым приложением и Dockerfile.
+1. [Git репозиторий с тестовым приложением и Dockerfile](https://github.com/Ingvar78/docker-repo/tree/main/fordocker).
 2. Регистр с собранным docker image. В качестве регистра может быть DockerHub или [Yandex Container Registry](https://cloud.yandex.ru/services/container-registry), созданный также с помощью terraform.
+
+[Docker image APP](https://hub.docker.com/repository/docker/egerpro/nginx-app/general)
+
 
 ---
 ### Подготовка cистемы мониторинга и деплой приложения
