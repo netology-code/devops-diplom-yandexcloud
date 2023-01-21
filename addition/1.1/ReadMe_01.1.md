@@ -1,3 +1,4 @@
+```
 iva@c9v:~/Documents/Diplom/1.0 $ 
 iva@c9v:~/Documents/Diplom/1.1 $ terraform workspace list 
 * default
@@ -94,3 +95,5 @@ internal_ip_address_each = toset([
   "10.2.0.19",
   "10.2.0.24",
 ])
+
+```
