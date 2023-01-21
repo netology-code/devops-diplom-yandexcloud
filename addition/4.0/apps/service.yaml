@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appservice
+  namespace: app-ns-stage
+spec:
+  selector:
+    app: testapp
+  ports:
+    - name: web-app
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: grafana
+    app.kubernetes.io/name: grafana-ingress
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 9.2.3
+  name: grafana-ingress
+  namespace: monitoring
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: grafana
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/part-of: kube-prometheus

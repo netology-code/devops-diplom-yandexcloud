@@ -1,0 +1,26 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testapp
+  namespace: app-ns-stage
+  labels:
+    app: apps-ns
+spec:
+  selector:
+    matchLabels:
+      app: testapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: testapp
+    spec:
+      containers:
+        - name: testapp
+          image: egerpro/nginx-app:1.0.1
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+            protocol: TCP
