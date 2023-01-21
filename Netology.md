@@ -195,6 +195,7 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 ![](./img/4.0/grafana-02.png)
 
 4. Http доступ к тестовому приложению.
+
 ![](./img/4.0/test-app-01.png)
 
 ---
