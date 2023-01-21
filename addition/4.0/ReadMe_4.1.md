@@ -254,3 +254,7 @@ monitoring    prometheus-k8s-1                           2/2     Running   0    
 monitoring    prometheus-operator-776c6c6b87-xhdpn       2/2     Running   0          2m11s
 
 ```
+
+После развёртывания необходимо удалить одно из правил создаваемое по умолчанию препятствующее доступу из вне к grafana
+
+$ kubectl -n monitoring delete networkpolicies.networking.k8s.io grafana

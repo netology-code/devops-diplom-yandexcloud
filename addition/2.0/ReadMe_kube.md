@@ -70,6 +70,35 @@ all:
 supplementary_addresses_in_ssl_keys: [158.160.56.132]
 supplementary_addresses_in_ssl_keys: [51.250.96.56] ->192.168.7.73
 
+В файле `addons.yml` устанавливаем дополнения необходимые для доступа снаружи к нашему приложению и web-интерфейсу grafana.
+
+```yaml
+---
+helm_enabled: true
+registry_enabled: false
+metrics_server_enabled: true
+metrics_server_container_port: 4443
+metrics_server_metric_resolution: 15s
+metrics_server_kubelet_preferred_address_types: "InternalIP,ExternalIP,Hostname"
+local_path_provisioner_enabled: false
+local_volume_provisioner_enabled: false
+cephfs_provisioner_enabled: false
+rbd_provisioner_enabled: false
+ingress_nginx_enabled: true
+ingress_publish_status_address: "51.250.1.219"
+ingress_nginx_namespace: "ingress-nginx"
+ingress_nginx_insecure_port: 80
+ingress_nginx_secure_port: 443
+ingress_nginx_class: nginx
+ingress_alb_enabled: false
+cert_manager_enabled: false
+metallb_enabled: false
+metallb_speaker_enabled: "{{ metallb_enabled }}"
+argocd_enabled: false
+krew_enabled: false
+krew_root_dir: "/usr/local/krew"
+```
+
 Устанавливваем
 ~/kubespray$
 ansible-playbook -i inventory/mycluster/hosts.yaml cluster.yml -b -v
