@@ -1,3 +1,8 @@
+Пример настройки и развёртывания системы мониторинга используя kube-prometheus.
+
+*Доступ непосредственно к web-интерфейсу prometheus будет реализован при развёртывании приложения на следующих шагах, приведённые данные в данном файле лишь демонстрируют ход предварительного развёртывания и проверки.
+
+
 # Create the namespace and CRDs, and then wait for them to be available before creating the remaining resources
 # Note that due to some CRD size we are using kubectl server-side apply feature which is generally available since kubernetes 1.22.
 # If you are using previous kubernetes versions this feature may not be available and you would need to use kubectl create instead.
@@ -38,6 +43,8 @@ $ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
 
 Then access via [http://localhost:9093](http://localhost:9093)
 
+
+# Ход развёртывания:
 
 ```
 iva@c9v:~/Documents/Diplom/4.0 $ git clone https://github.com/prometheus-operator/kube-prometheus.git

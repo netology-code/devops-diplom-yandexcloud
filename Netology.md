@@ -29,12 +29,11 @@
 
 Особенности выполнения:
 
-- Бюджет купона ограничен, что следует иметь в виду при проектировании инфраструктуры и использовании ресурсов;
-- Следует использовать последнюю стабильную версию [Terraform](https://www.terraform.io/).
-
 Предварительная подготовка к установке и запуску Kubernetes кластера.
 
 1. Создайте сервисный аккаунт, который будет в дальнейшем использоваться Terraform для работы с инфраструктурой с необходимыми и достаточными правами. Не стоит использовать права суперпользователя
+
+Ниже приведены различные варианты созлания сервисного акканута, для решения поставленной задачи использовался [Вариант 2](./addition/1.0/) как наиболее оптимальный в данном случае.
 
 - [Вариант 1](./addition/1/)
 - [Вариант 2](./addition/1.0/)
@@ -65,6 +64,13 @@
 
 [Полученная конфигурация инфраструктуры](./addition/1.1/) является предварительной и будет изменена в дальнейшем.
 
+
+```
+iva@c9v:~/Documents/Diplom/1.1 $ terraform workspace list 
+  default
+  prod
+* stage
+```
 
 ```
 iva@c9v:~/Documents/devops-diplom-yandexcloud/addition/1.1  (1.2 *)$ tree 
@@ -107,7 +113,7 @@ iva@c9v:~/Documents/devops-diplom-yandexcloud/addition/1.1  (1.2 *)$ tree
 2. В файле `~/.kube/config` находятся данные для доступа к кластеру.
 3. Команда `kubectl get pods --all-namespaces` отрабатывает без ошибок.
 
-*[Порядок развёртывания](addition/2.0/ReadMe_kube.md)
+*Описание порядка развёртывания [Kubernetes](addition/2.0/ReadMe_kube.md)
 
 ```
 iva@c9v:~/Documents/devops-diplom-yandexcloud  (2.0 *)$ kubectl get pods --all-namespaces
@@ -155,7 +161,7 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 1. [Git репозиторий с тестовым приложением и Dockerfile](https://github.com/Ingvar78/docker-repo/tree/main/fordocker).
 2. Регистр с собранным docker image. В качестве регистра может быть DockerHub или [Yandex Container Registry](https://cloud.yandex.ru/services/container-registry), созданный также с помощью terraform.
 
-[Docker image APP](https://hub.docker.com/repository/docker/egerpro/nginx-app/general)
+* Тестовое приложение размещённое на [DockerHUB](https://hub.docker.com/repository/docker/egerpro/nginx-app/general)
 
 ![](/img/3.0/docker_app.png)
 
@@ -178,10 +184,18 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 1. Для организации конфигурации можно использовать [helm charts](https://helm.sh/)
 
 Ожидаемый результат:
-1. Git репозиторий с конфигурационными файлами для настройки Kubernetes.
-2. Http доступ к web интерфейсу grafana.
+1. Git репозиторий с конфигурационными файлами для настройки [Kubernetes](./addition/2.0/).
+
+2. Http доступ к web интерфейсу grafana. 
+
+![](./img/4.0/grafana-01.png)
+
 3. Дашборды в grafana отображающие состояние Kubernetes кластера.
+
+![](./img/4.0/grafana-02.png)
+
 4. Http доступ к тестовому приложению.
+![](./img/4.0/test-app-01.png)
 
 ---
 ### 5. Установка и настройка CI/CD
