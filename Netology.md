@@ -228,9 +228,10 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 
 * для доступа к интерфейсу Grafana и тестовому приложению необходимо прописать в hosts следующие данные, т.к. публикаций A-записей в DNS не производилось:
 
+```hosts
 51.250.76.229 grafana grafana.eger.pro
 51.250.76.229 testapp testapp.eger.pro
-
+```
 Доступ к Grafana: http://grafana.eger.pro/ admin/NetoAdmin (логин/пароль)
 
 Тестовое приложение: http://testapp.eger.pro/
