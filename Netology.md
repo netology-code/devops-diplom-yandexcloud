@@ -45,7 +45,7 @@
 
 - ввиду имеющихся ограничений при работе в дипломе будет использоваться S3 bucket в ЯО аккаунте. Создание аккаунта и S3 bucket-а производится с использованием [Вариант 2](./addition/1.0/), дальнейшая работа с terraform будет вестись с использованием созданного сервисного аккаунта.
 
-*[Порядок создания сервисного аккаунта, файла с данными 'Service Account key file'](./addition/1.0/ReadMe_01.md)
+* [Порядок создания сервисного аккаунта, файла с данными 'Service Account key file'](./addition/1.0/ReadMe_01.md)
 
 
 3. Настройте [workspaces](https://www.terraform.io/docs/language/state/workspaces.html)  
@@ -113,7 +113,7 @@ iva@c9v:~/Documents/devops-diplom-yandexcloud/addition/1.1  (1.2 *)$ tree
 2. В файле `~/.kube/config` находятся данные для доступа к кластеру.
 3. Команда `kubectl get pods --all-namespaces` отрабатывает без ошибок.
 
-*Описание порядка развёртывания [Kubernetes](addition/2.0/ReadMe_kube.md)
+* Описание порядка развёртывания [Kubernetes](addition/2.0/ReadMe_kube.md)
 
 ```
 iva@c9v:~/Documents/devops-diplom-yandexcloud  (2.0 *)$ kubectl get pods --all-namespaces
@@ -221,11 +221,28 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 
 1. [x] Репозиторий с конфигурационными файлами Terraform и готовность продемонстрировать создание всех ресурсов с нуля.
 2. [] Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud.
-3. [] Репозиторий с конфигурацией ansible, если был выбран способ создания Kubernetes кластера при помощи ansible.
+3. [x] Репозиторий с конфигурацией ansible, если был выбран способ создания Kubernetes кластера при помощи ansible.
 4. [x] Репозиторий с Dockerfile тестового приложения и ссылка на собранный docker image.
 5. [x] Репозиторий с конфигурацией Kubernetes кластера.
-6. [] Ссылка на тестовое приложение и веб интерфейс Grafana с данными доступа.
-7. [] Все репозитории рекомендуется хранить на одном ресурсе (github, gitlab)
+6. [x] Ссылка на тестовое приложение и веб интерфейс Grafana с данными доступа.
+
+* для доступа к интерфейсу Grafana и тестовому приложению необходимо прописать в hosts следующие данные, т.к. публикаций A-записей в DNS не производилось:
+
+51.250.76.229 grafana grafana.eger.pro
+51.250.76.229 testapp testapp.eger.pro
+
+Доступ к Grafana: http://grafana.eger.pro/ admin/NetoAdmin (логин/пароль)
+
+Тестовое приложение: http://testapp.eger.pro/
+
+* для корректной работы по http-протоколу рекомендуется использовать режим Incognito Chrome, т.к. в нём не происходит принудительное переключение на https.
+
+
+7. [x] Все репозитории рекомендуется хранить на одном ресурсе (github, gitlab) - репозитории размещены на GitHub:
+
+[https://github.com/Ingvar78/devops-diplom-yandexcloud](https://github.com/Ingvar78/devops-diplom-yandexcloud) - основоной репозиторий с данными terraform/ansible
+
+[https://github.com/Ingvar78/docker-repo](https://github.com/Ingvar78/docker-repo) - репозиторий с тестовым приложением.
 
 ---
 ## Как правильно задавать вопросы дипломному руководителю?
