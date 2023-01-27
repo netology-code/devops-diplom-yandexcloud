@@ -1,0 +1,21 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: atlantis-ingress
+  namespace: atlantis
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: atlantis.eger.pro
+    http:
+      paths:
+        - path: "/"
+          pathType: Prefix
+          backend:
+            service:
+              name: atlantis
+              port:
+                number: 80
+
