@@ -198,6 +198,12 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 
 ![](./img/4.0/test-app-01.png)
 
+5. [Helm Atlantis](./addition/5.0/)
+
+![](./img/5.0/atlantis-02.png)
+
+![](./img/5.0/atlantis-03.png)
+
 ---
 ### 5. Установка и настройка CI/CD
 
@@ -220,7 +226,7 @@ kube-system   nodelocaldns-bnhmf                         1/1     Running   0    
 ## Что необходимо для сдачи задания?
 
 1. [x] Репозиторий с конфигурационными файлами Terraform и готовность продемонстрировать создание всех ресурсов с нуля.
-2. [] Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud.
+2. [x] Пример [pull request](https://github.com/Ingvar78/docker-repo/pull/3) с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud.
 3. [x] Репозиторий с конфигурацией ansible, если был выбран способ создания Kubernetes кластера при помощи ansible.
 4. [x] Репозиторий с Dockerfile тестового приложения и ссылка на собранный docker image.
 5. [x] Репозиторий с конфигурацией Kubernetes кластера.
