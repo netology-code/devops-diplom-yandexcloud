@@ -123,7 +123,7 @@
 1. Автоматическая сборка docker образа при коммите в репозиторий с тестовым приложением.
 2. Автоматический деплой нового docker образа.
 
-Можно использовать [teamcity](https://www.jetbrains.com/ru-ru/teamcity/), [jenkins](https://www.jenkins.io/), [gitlab ci](https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/) или GitHub Actions.
+Можно использовать [teamcity](https://www.jetbrains.com/ru-ru/teamcity/), [jenkins](https://www.jenkins.io/), [GitLab CI](https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/) или GitHub Actions.
 
 Ожидаемый результат:
 
