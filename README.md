@@ -109,6 +109,7 @@
 2. Http доступ на 80 порту к web интерфейсу grafana.
 3. Дашборды в grafana отображающие состояние Kubernetes кластера.
 4. Http доступ на 80 порту к тестовому приложению.
+5. Atlantis или terraform cloud или ci/cd-terraform
 ---
 ### Установка и настройка CI/CD
 
