@@ -1,0 +1,85 @@
+# ============================================================
+# Настройки Grafana для дипломного проекта
+# Файл: monitoring/helm-values/grafana-values.yaml
+# ============================================================
+
+fullnameOverride: grafana
+
+# Ресурсы (экономия)
+resources:
+  requests:
+    memory: 128Mi
+    cpu: 50m
+  limits:
+    memory: 256Mi
+    cpu: 100m
+
+# Хранение (для дашбордов и настроек)
+persistence:
+  enabled: true
+  size: 2Gi
+  storageClass: "network-hdd"
+
+# Настройки входа (для диплома — простой пароль)
+adminUser: admin
+adminPassword: diploma2024  # ⚠️ В продакшене используйте Lockbox!
+
+# Service для доступа к Grafana UI
+service:
+  type: ClusterIP
+  port: 80
+
+# Ingress (опционально)
+# ingress:
+#   enabled: true
+#   className: nginx
+#   hosts:
+#     - grafana.diploma.local
+#   paths:
+#     - path: /
+#       pathType: Prefix
+
+# Предварительно установленные дашборды
+dashboards:
+  default:
+    # Kubernetes Cluster Monitoring
+    k8s-cluster:
+      gnetId: 315
+      revision: 1
+      datasource: Prometheus
+    # Kubernetes Node Monitoring
+    k8s-nodes:
+      gnetId: 13978
+      revision: 1
+      datasource: Prometheus
+    # Prometheus Monitoring
+    prometheus:
+      gnetId: 3662
+      revision: 1
+      datasource: Prometheus
+
+# Источники данных (Prometheus)
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.monitoring.svc.cluster.local:9090
+      access: proxy
+      isDefault: true
+      editable: true
+
+# Плагины (опционально)
+plugins:
+  - grafana-piechart-panel
+  - grafana-worldmap-panel
+
+# Sidecar для авто-обновления дашбордов
+sidecar:
+  dashboards:
+    enabled: true
+    searchNamespace: ALL
+  datasources:
+    enabled: true
+    searchNamespace: ALL

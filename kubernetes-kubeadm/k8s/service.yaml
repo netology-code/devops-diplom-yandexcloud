@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: diploma-test-app
+spec:
+  type: NodePort  # ← Изменено с ClusterIP
+  selector:
+    app: diploma-test-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30080  # ← Явно укажите порт в диапазоне 30000-32767
+    protocol: TCP

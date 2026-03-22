@@ -1,0 +1,45 @@
+# ============================================================
+# 🌐 Ingress для доступа к приложению из Интернета
+# Файл: kubernetes-kubeadm/k8s/ingress.yaml
+# Примечание: Требуется установленный Ingress Controller (nginx-ingress, traefik)
+# ============================================================
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: diploma-test-app
+  labels:
+    app: diploma-test-app
+  # annotations:
+  #   kubernetes.io/ingress.class: "nginx"
+  #   cert-manager.io/cluster-issuer: "letsencrypt-prod"  # Для HTTPS
+spec:
+  # 🔐 TLS (опционально, требует cert-manager)
+  # tls:
+  # - hosts:
+  #   - app.diploma.example.com
+  #   secretName: diploma-tls-secret
+  
+  rules:
+  # 🌍 Если есть домен — раскомментируйте и замените
+  # - host: app.diploma.example.com
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: diploma-test-app
+  #           port:
+  #             name: http
+  
+  # 🎯 Если домена нет — доступ по IP через default backend
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: diploma-test-app
+            port:
+              name: http

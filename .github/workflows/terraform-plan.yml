@@ -1,0 +1,62 @@
+# ============================================================
+# GitHub Actions: Terraform Plan на Pull Request
+# Файл: .github/workflows/terraform-plan.yml
+# ============================================================
+
+name: Terraform Plan
+
+on:
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  terraform-plan:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: '1.6.0'
+
+    - name: Terraform Init
+      run: |
+        cd bootstrap
+        terraform init \
+          -backend-config="bucket=${{ secrets.TF_BUCKET_NAME }}" \
+          -backend-config="access_key=${{ secrets.TF_ACCESS_KEY }}" \
+          -backend-config="secret_key=${{ secrets.TF_SECRET_KEY }}"
+      
+    - name: Terraform Validate
+      run: |
+        cd bootstrap
+        terraform validate
+
+    - name: Terraform Plan
+      run: |
+        cd bootstrap
+        terraform plan -no-color -out=tfplan
+      env:
+        TF_VAR_yandex_token: ${{ secrets.YC_TOKEN }}
+        YC_TOKEN: ${{ secrets.YC_TOKEN }}
+
+    - name: Comment PR with Plan Output
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const plan = fs.readFileSync('bootstrap/tfplan', 'utf8');
+          await github.rest.issues.createComment({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `## 🗂️ Terraform Plan Output\n\n\`\`\`\n${plan.substring(0, 65000)}\n\`\`\``
+          });

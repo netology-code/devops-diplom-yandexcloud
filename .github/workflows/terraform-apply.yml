@@ -1,0 +1,65 @@
+# ============================================================
+# GitHub Actions: Terraform Apply на merge в main
+# Файл: .github/workflows/terraform-apply.yml
+# ============================================================
+
+name: Terraform Apply
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  terraform-apply:
+    name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: '1.6.0'
+
+    - name: Terraform Init
+      run: |
+        cd bootstrap
+        terraform init \
+          -backend-config="bucket=${{ secrets.TF_BUCKET_NAME }}" \
+          -backend-config="access_key=${{ secrets.TF_ACCESS_KEY }}" \
+          -backend-config="secret_key=${{ secrets.TF_SECRET_KEY }}" \
+          -reconfigure
+
+    - name: Terraform Validate
+      run: |
+        cd bootstrap
+        terraform validate
+
+    - name: Terraform Plan
+      run: |
+        cd bootstrap
+        terraform plan -no-color -out=tfplan
+      env:
+        TF_VAR_yandex_token: ${{ secrets.YC_TOKEN }}
+        YC_TOKEN: ${{ secrets.YC_TOKEN }}
+
+    - name: Terraform Apply
+      run: |
+        cd bootstrap
+        terraform apply -auto-approve tfplan
+      env:
+        TF_VAR_yandex_token: ${{ secrets.YC_TOKEN }}
+        YC_TOKEN: ${{ secrets.YC_TOKEN }}
+
+    - name: Update Outputs
+      run: |
+        cd bootstrap
+        terraform output -json > ../infrastructure/bootstrap-outputs.json
+      env:
+        YC_TOKEN: ${{ secrets.YC_TOKEN }}

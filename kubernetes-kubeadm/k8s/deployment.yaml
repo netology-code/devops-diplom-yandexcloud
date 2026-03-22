@@ -1,0 +1,82 @@
+# ============================================================
+# 🚀 Deployment для тестового приложения диплома
+# Файл: kubernetes-kubeadm/k8s/deployment.yaml
+# ============================================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diploma-test-app
+  labels:
+    app: diploma-test-app
+    project: diploma
+    environment: dev
+spec:
+  replicas: 3  # 3 реплики для отказоустойчивости
+  selector:
+    matchLabels:
+      app: diploma-test-app
+  template:
+    metadata:  # ✅ Исправлено: было "meta", должно быть "metadata"
+      labels:
+        app: diploma-test-app
+        project: diploma
+    spec:
+      # 🔐 Service account для доступа к реестру (если нужен)
+      # serviceAccountName: k8s-node-sa
+      
+      containers:
+      - name: nginx
+        # 📦 Образ: замените <REGISTRY_ID> на реальный ID из terraform output
+        image: nastya2005/diploma-test-app:latest
+        imagePullPolicy: Always  # Всегда тянуть свежий образ
+        
+        # 🔓 Порты
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        
+        # 🏥 Health checks для Kubernetes
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+        
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+        
+        # 💾 Ресурсы (ограничения для экономии)
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        
+        # 🏷️ Переменные окружения (опционально)
+        env:
+        - name: APP_NAME
+          value: "diploma-test-app"
+        - name: APP_VERSION
+          value: "1.0.0"
+
+      
+      # 🛑 Политика перезапуска
+      restartPolicy: Always
+      
+      # ⏱️ Таймауты
+      terminationGracePeriodSeconds: 30

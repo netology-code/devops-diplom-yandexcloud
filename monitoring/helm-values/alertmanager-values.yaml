@@ -1,0 +1,54 @@
+# ============================================================
+# Настройки Alertmanager для дипломного проекта
+# Файл: monitoring/helm-values/alertmanager-values.yaml
+# ============================================================
+
+fullnameOverride: alertmanager
+
+# Ресурсы (минимальные для демо)
+resources:
+  requests:
+    memory: 64Mi
+    cpu: 25m
+  limits:
+    memory: 128Mi
+    cpu: 50m
+
+# Хранение (для silences и notifications)
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: "network-hdd"
+
+# Service для доступа
+service:
+  type: ClusterIP
+  port: 9093
+
+# Настройка уведомлений (для диплома — логирование)
+config:
+  global:
+    resolve_timeout: 5m
+  route:
+    group_by: ['alertname', 'job']
+    group_wait: 30s
+    group_interval: 5m
+    repeat_interval: 12h
+    receiver: 'log-only'
+    routes:
+      - match:
+          severity: critical
+        receiver: 'log-only'
+  receivers:
+    - name: 'log-only'
+      # Для диплома: просто логируем алерты
+      # В продакшене: добавьте slack_configs, email_configs, etc.
+      webhook_configs:
+        - url: 'http://localhost:9094/log'  # Заглушка для демо
+
+# Ingress (опционально)
+# ingress:
+#   enabled: true
+#   className: nginx
+#   hosts:
+#     - alertmanager.diploma.local

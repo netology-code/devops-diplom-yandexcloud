@@ -1,0 +1,15 @@
+# ============================================================
+# Пространство имён для системы мониторинга
+# Файл: monitoring/manifests/namespace.yaml
+# ============================================================
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels:
+    app: monitoring
+    project: diploma
+    environment: dev
+  annotations:
+    description: "Namespace for Prometheus, Grafana, Alertmanager monitoring stack"

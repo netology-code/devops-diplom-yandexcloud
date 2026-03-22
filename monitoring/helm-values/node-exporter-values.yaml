@@ -1,0 +1,40 @@
+# ============================================================
+# Настройки Node Exporter для дипломного проекта
+# Файл: monitoring/helm-values/node-exporter-values.yaml
+# ============================================================
+
+fullnameOverride: node-exporter
+
+# Ресурсы (очень минимальные, так как агент лёгкий)
+resources:
+  requests:
+    memory: 32Mi
+    cpu: 10m
+  limits:
+    memory: 64Mi
+    cpu: 50m
+
+# Запуск на всех нодах (включая master, для полной картины)
+prometheus:
+  monitor:
+    enabled: true
+    # Интервал сбора метрик
+    scrapeInterval: 30s
+    # Дополнительные метрики для Kubernetes
+    additionalScrapeConfigs: []
+
+# Настройки сбора метрик
+extraArgs:
+  - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+)($|/)
+  - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|cgroup|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|mqueue|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|sysfs|tracefs)$
+
+# Service для Prometheus
+service:
+  port: 9100
+  targetPort: 9100
+
+# ServiceMonitor для Prometheus Operator (если используется)
+serviceMonitor:
+  enabled: true
+  interval: 30s
+  scrapeTimeout: 10s

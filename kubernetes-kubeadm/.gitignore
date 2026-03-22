@@ -1,0 +1,17 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+!*.tfvars.example
+.terraform.lock.hcl
+*.json
+!terraform.tfvars.example
+*.pem
+*.key
+ansible/hosts.ini
+*.retry
+*.log
+.DS_Store
+tfplan.*
+tfplan*
